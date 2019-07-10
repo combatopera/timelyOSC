@@ -1,0 +1,5 @@
+{|
+! master
+|-
+| [[Image:https://travis-ci.org/combatopera/timelyOSC.svg?branch=master]]
+|}

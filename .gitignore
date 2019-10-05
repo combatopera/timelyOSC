@@ -1,1 +1,7 @@
+#gclean
 __pycache__/
+/build/
+/dist/
+/setup.cfg
+/setup.py
+/timelyOSC.egg-info/

@@ -130,7 +130,7 @@ class Message:
         f = io.BytesIO()
         w = Writer(f)
         w.s(self.addrpattern)
-        w.s(',' + ''.join(self.tags[type(arg)] for arg in self.args))
+        w.s(f",{''.join(self.tags[type(arg)] for arg in self.args)}")
         for arg in self.args:
             getattr(w, self.tags[type(arg)])(arg)
         return f.getvalue()

@@ -102,13 +102,13 @@ class Bundle:
 
 class Message:
 
-    types = {
-        'i': Reader.int32,
-        'f': Reader.float32,
-        'd': Reader.float64,
-        'b': Reader.blob,
-        's': Reader.string,
-    }
+    types = dict(
+        i = Reader.int32,
+        f = Reader.float32,
+        d = Reader.float64,
+        b = Reader.blob,
+        s = Reader.string,
+    )
     tags = {
         int: 'i',
         str: 's',

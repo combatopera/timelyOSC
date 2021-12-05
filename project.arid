@@ -19,3 +19,4 @@ name = timelyOSC
 author = Andrzej Cichocki
 years += 2019
 pyversions += 3
+buildbot enabled = true

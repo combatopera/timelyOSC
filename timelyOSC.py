@@ -87,15 +87,17 @@ class Bundle:
 
     @classmethod
     def read(cls, v):
-        return cls(v)
-
-    def __init__(self, v):
         r = Reader(v)
         r.string()
-        self.timetag = r.timetag()
-        self.elements = []
+        timetag = r.timetag()
+        elements = []
         while r:
-            self.elements.append(r.element())
+            elements.append(r.element())
+        return cls(timetag, elements)
+
+    def __init__(self, timetag, elements):
+        self.timetag = timetag
+        self.elements = elements
 
     def __repr__(self):
         return f"{type(self).__name__}({self.timetag!r}, {self.elements!r})"

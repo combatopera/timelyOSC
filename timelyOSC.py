@@ -24,14 +24,13 @@ int32 = Struct('>i')
 float32 = Struct('>f')
 float64 = Struct('>d')
 timetag = Struct('>II')
+seconds1970 = 25567 * 24 * 60 * 60
+fractionlimit = 1 << 32
 
 def parse(v):
     return (Bundle.read if v.startswith(bundlemagic) else Message.read)(v)
 
 class Reader:
-
-    seconds1970 = 25567 * 24 * 60 * 60
-    fractionlimit = 1 << 32
 
     def __init__(self, v):
         self.c = 0
@@ -69,7 +68,7 @@ class Reader:
 
     def timetag(self):
         seconds1900, fraction = timetag.unpack(self.consume(8))
-        return seconds1900 - self.seconds1970 + fraction / self.fractionlimit
+        return seconds1900 - seconds1970 + fraction / fractionlimit
 
     def element(self):
         return parse(self.consume(self.int32()))
@@ -105,6 +104,16 @@ class Bundle:
 
     def __repr__(self):
         return f"{type(self).__name__}({self.timetag!r}, {self.elements!r})"
+
+    def ser(self):
+        f = BytesIO()
+        w = Writer(f)
+        w.s('#bundle')
+        f.write(timetag.pack(seconds1970 + int(self.timetag // 1), round(self.timetag % 1 * fractionlimit)))
+        for e in (e.ser() for e in self.elements):
+            w.i(len(e))
+            f.write(e)
+        return f.getvalue()
 
 class Message:
 

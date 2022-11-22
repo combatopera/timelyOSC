@@ -15,6 +15,21 @@
 # You should have received a copy of the GNU General Public License
 # along with timelyOSC.  If not, see <http://www.gnu.org/licenses/>.
 
-import timelyOSC
+from timelyOSC import Bundle, Message, parse
+from unittest import TestCase
 
-assert timelyOSC
+class TestBundle(TestCase):
+
+    def test_roundtrip(self):
+        b = parse(Bundle(346.125, [
+            Bundle(500, [Message('/zyx', [])]),
+            Message('/woo', [100, 'yay']),
+        ]).ser())
+        self.assertEqual(346.125, b.timetag)
+        e, f = b.elements
+        self.assertEqual(500, e.timetag)
+        g, = e.elements
+        self.assertEqual('/zyx', g.addrpattern)
+        self.assertEqual([], g.args)
+        self.assertEqual('/woo', f.addrpattern)
+        self.assertEqual([100, 'yay'], f.args)

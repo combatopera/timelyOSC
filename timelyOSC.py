@@ -15,11 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with timelyOSC.  If not, see <http://www.gnu.org/licenses/>.
 
-import struct, io
+from io import BytesIO
+from struct import Struct
 
 bundlemagic = b'#bundle\0'
 charset = 'ascii'
-int32 = '>i'
+int32 = Struct('>i')
+float32 = Struct('>f')
+float64 = Struct('>d')
+timetag = Struct('>II')
 
 def parse(v):
     return (Bundle.read if v.startswith(bundlemagic) else Message.read)(v)
@@ -44,13 +48,13 @@ class Reader:
         self.c += (-self.c) % 4
 
     def int32(self):
-        return struct.unpack(int32, self.consume(4))[0]
+        return int32.unpack(self.consume(4))[0]
 
     def float32(self):
-        return struct.unpack('>f', self.consume(4))[0]
+        return float32.unpack(self.consume(4))[0]
 
     def float64(self):
-        return struct.unpack('>d', self.consume(8))[0]
+        return float64.unpack(self.consume(8))[0]
 
     def blob(self):
         blob = self.consume(self.int32())
@@ -64,7 +68,7 @@ class Reader:
         return text
 
     def timetag(self):
-        seconds1900, fraction = struct.unpack('>II', self.consume(8))
+        seconds1900, fraction = timetag.unpack(self.consume(8))
         return seconds1900 - self.seconds1970 + fraction / self.fractionlimit
 
     def element(self):
@@ -81,7 +85,7 @@ class Writer:
         self.f.write(v)
 
     def i(self, n):
-        self.f.write(struct.pack(int32, n))
+        self.f.write(int32.pack(n))
 
 class Bundle:
 
@@ -129,7 +133,7 @@ class Message:
         return f"{type(self).__name__}({self.addrpattern!r}, {self.args!r})"
 
     def ser(self):
-        f = io.BytesIO()
+        f = BytesIO()
         w = Writer(f)
         w.s(self.addrpattern)
         w.s(f",{''.join(self.tags[type(arg)] for arg in self.args)}")

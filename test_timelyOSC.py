@@ -33,3 +33,6 @@ class TestBundle(TestCase):
         self.assertEqual([], g.args)
         self.assertEqual('/woo', f.addrpattern)
         self.assertEqual([100, 'yay'], f.args)
+
+    def test_float32(self):
+        self.assertEqual([1.25], parse(Message('/woo', [1.25]).ser()).args)

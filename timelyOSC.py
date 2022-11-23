@@ -76,15 +76,18 @@ class Reader:
 class Writer:
 
     def __init__(self, f):
-        self.f = f
+        self._f = f
 
     def s(self, text):
         v = text.encode(charset) + b'\0'
         v += b'\0' * ((-len(v)) % 4)
-        self.f.write(v)
+        self._f.write(v)
 
     def i(self, n):
-        self.f.write(int32.pack(n))
+        self._f.write(int32.pack(n))
+
+    def f(self, n):
+        self._f.write(float32.pack(n))
 
 class Bundle:
 
@@ -126,6 +129,7 @@ class Message:
     )
     tags = {
         int: 'i',
+        float: 'f',
         str: 's',
     }
 
@@ -145,7 +149,8 @@ class Message:
         f = BytesIO()
         w = Writer(f)
         w.s(self.addrpattern)
-        w.s(f",{''.join(self.tags[type(arg)] for arg in self.args)}")
-        for arg in self.args:
-            getattr(w, self.tags[type(arg)])(arg)
+        tags = [self.tags[type(arg)] for arg in self.args]
+        w.s(f",{''.join(tags)}")
+        for tt, arg in zip(tags, self.args):
+            getattr(w, tt)(arg)
         return f.getvalue()

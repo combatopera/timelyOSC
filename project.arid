@@ -15,8 +15,11 @@
 : You should have received a copy of the GNU General Public License
 : along with timelyOSC.  If not, see <http://www.gnu.org/licenses/>.
 
-name = timelyOSC
 author = Andrzej Cichocki
-years += 2019
-pyversions += 3
 buildbot enabled = true
+github account = combatopera
+name = timelyOSC
+pypi account = combatopera
+pyversions += 3
+tagline = Open Sound Control library for Python 3
+years += 2019

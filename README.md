@@ -29,4 +29,4 @@ Get codebase and install executables:
 git clone git@github.com:combatopera/timelyOSC.git
 motivate timelyOSC
 ```
-Requirements will be satisfied just in time, using sibling projects with matching PKG-INFO if any.
+Requirements will be satisfied just in time, using sibling projects with matching .egg-info if any.

@@ -4,17 +4,29 @@ Open Sound Control library for Python 3
 ## Install
 These are generic installation instructions.
 
-### To use, permanently
-The quickest way to get started is to install the current release from PyPI:
-```
-pip3 install --user timelyOSC
-```
-
 ### To use, temporarily
-If you prefer to keep .local clean, install to a virtualenv:
+Install the current release from PyPI to a disposable virtual env:
 ```
 python3 -m venv venvname
 venvname/bin/pip install -U pip
 venvname/bin/pip install timelyOSC
 . venvname/bin/activate
 ```
+
+### To use, permanently
+```
+pip3 install --user timelyOSC
+```
+See `~/.local/bin` for executables.
+
+### To develop
+First install venvpool to get the `motivate` command:
+```
+pip3 install --user venvpool
+```
+Get codebase and install executables:
+```
+git clone git@github.com:combatopera/timelyOSC.git
+motivate timelyOSC
+```
+Requirements will be satisfied just in time, using sibling projects with matching PKG-INFO if any.

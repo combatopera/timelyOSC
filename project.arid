@@ -22,6 +22,5 @@ github account = combatopera
 name = timelyOSC
 pydoc_enabled = false
 pypi account = combatopera
-pyversions += 3
 tagline = Open Sound Control library for Python 3
 years += 2019

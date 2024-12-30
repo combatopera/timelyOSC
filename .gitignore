@@ -1,7 +1,6 @@
 __pycache__/
 /build/
 /dist/
-/setup.cfg
 /setup.py
 timelyOSC.egg-info/*
 !timelyOSC.egg-info/PKG-INFO

@@ -20,7 +20,6 @@ author_email = 3613868+combatopera@users.noreply.github.com
 buildbot enabled = true
 github account = combatopera
 name = timelyOSC
-pydoc_enabled = false
 pypi account = combatopera
 tagline = Open Sound Control library for Python 3
 years += 2019

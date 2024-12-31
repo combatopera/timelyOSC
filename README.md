@@ -30,3 +30,10 @@ git clone git@github.com:combatopera/timelyOSC.git
 motivate timelyOSC
 ```
 Requirements will be satisfied just in time, using sibling projects with matching .egg-info if any.
+
+## API
+
+<a id="timelyOSC"></a>
+
+### timelyOSC
+

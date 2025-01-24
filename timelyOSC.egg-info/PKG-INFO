@@ -25,14 +25,14 @@ venvname/bin/pip install timelyOSC
 
 ### To use, permanently
 ```
-pip3 install --user timelyOSC
+pip3 install --break-system-packages --user timelyOSC
 ```
 See `~/.local/bin` for executables.
 
 ### To develop
 First install venvpool to get the `motivate` command:
 ```
-pip3 install --user venvpool
+pip3 install --break-system-packages --user venvpool
 ```
 Get codebase and install executables:
 ```

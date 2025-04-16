@@ -1,5 +1,5 @@
 # timelyOSC
-Open Sound Control library for Python 3
+Open Sound Control library for Python 3.
 
 ## Install
 These are generic installation instructions.

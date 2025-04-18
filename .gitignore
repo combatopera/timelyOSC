@@ -4,5 +4,4 @@ __pycache__/
 /setup.py
 timelyOSC.egg-info/*
 !timelyOSC.egg-info/PKG-INFO
-!timelyOSC.egg-info/requires.txt
 /pyproject.toml

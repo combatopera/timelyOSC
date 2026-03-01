@@ -1,6 +1,6 @@
 Metadata-Version: 2.2
 Name: timelyOSC
-Version: 14.dev0
+Version: 15.dev0
 Summary: Open Sound Control library for Python 3
 Home-page: https://github.com/combatopera/timelyOSC
 Author: Andrzej Cichocki
